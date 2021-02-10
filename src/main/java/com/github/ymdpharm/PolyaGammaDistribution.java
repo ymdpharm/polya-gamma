@@ -1,7 +1,7 @@
 package com.github.ymdpharm;
 
 import com.github.ymdpharm.approx.ApproxSampler;
-import com.github.ymdpharm.approx.ApproxSamplerSP;
+import com.github.ymdpharm.approx.ApproxSamplerWrapper;
 import com.github.ymdpharm.approx.ApproxValue;
 import com.github.ymdpharm.approx.ApproxValueLaplace;
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
@@ -41,7 +41,7 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
         this.b = b;
         this.c = c;
         this.solverAbsoluteAccuracy = inverseCumAccuracy;
-        this.approxSampler = new ApproxSamplerSP(b, c);
+        this.approxSampler = new ApproxSamplerWrapper(b, c);
         this.approxValue = new ApproxValueLaplace(b, c);
     }
 
@@ -86,6 +86,6 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     }
 
     public double sample() {
-        return approxSampler.sample();
+        return approxSampler.sample(this.random);
     }
 }

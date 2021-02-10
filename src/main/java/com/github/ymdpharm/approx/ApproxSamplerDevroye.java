@@ -1,5 +1,7 @@
 package com.github.ymdpharm.approx;
 
+import org.apache.commons.math3.random.RandomGenerator;
+
 /*
 Devroye Approximation
 
@@ -15,7 +17,7 @@ public class ApproxSamplerDevroye implements ApproxSampler {
         this.c = c;
     }
 
-    public double sample() {
+    public double sample(RandomGenerator rng) {
         return 0;
     }
 }
