@@ -9,7 +9,6 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.commons.math3.random.Well19937c;
-import org.apache.commons.math3.exception.MathRuntimeException;
 
 public class PolyaGammaDistribution extends AbstractRealDistribution {
     private final double b;
@@ -47,11 +46,11 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     }
 
     public double density(double x) {
-        throw new MathRuntimeException(LocalizedFormats.UNSUPPORTED_OPERATION);
+        return approxValue.density(x);
     }
 
     public double cumulativeProbability(double v) {
-        throw new MathRuntimeException(LocalizedFormats.UNSUPPORTED_OPERATION);
+        return approxValue.cumulativeProbability(v);
     }
 
     protected double getSolverAbsoluteAccuracy() {
