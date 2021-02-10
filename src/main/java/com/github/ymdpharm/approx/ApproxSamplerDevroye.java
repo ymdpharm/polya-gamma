@@ -13,7 +13,7 @@ public class ApproxSamplerDevroye implements ApproxSampler {
         this.b = b;
         this.c = c;
         this.trunc = trunc;
-        this.gammaB1 = new GammaDistribution(b, 1);
+        this.gammaB1 = new GammaDistribution(b, 1); // rgn
     }
 
     /*
