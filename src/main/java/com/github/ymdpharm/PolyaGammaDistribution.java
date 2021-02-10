@@ -70,7 +70,7 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     }
 
     public double getSupportUpperBound() {
-        return Double.MAX_VALUE;
+        return Double.POSITIVE_INFINITY;
     }
 
     public boolean isSupportLowerBoundInclusive() {
