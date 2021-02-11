@@ -1,4 +1,4 @@
-package com.github.ymdpharm.approx;
+package com.github.ymdpharm.polyagamma.approx;
 
 import org.apache.commons.math3.distribution.GammaDistribution;
 import org.apache.commons.math3.exception.NotStrictlyPositiveException;

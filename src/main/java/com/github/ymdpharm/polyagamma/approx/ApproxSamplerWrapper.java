@@ -1,4 +1,4 @@
-package com.github.ymdpharm.approx;
+package com.github.ymdpharm.polyagamma.approx;
 
 import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
@@ -6,6 +6,7 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 public class ApproxSamplerWrapper implements ApproxSampler {
     private final ApproxSampler sampler;
+
     /**
      * select the most effective sampling algorithm automatically, based on b.
      */

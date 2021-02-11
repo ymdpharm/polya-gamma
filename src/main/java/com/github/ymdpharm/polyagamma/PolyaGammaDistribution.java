@@ -1,9 +1,9 @@
-package com.github.ymdpharm;
+package com.github.ymdpharm.polyagamma;
 
-import com.github.ymdpharm.approx.ApproxSampler;
-import com.github.ymdpharm.approx.ApproxSamplerWrapper;
-import com.github.ymdpharm.approx.ApproxValue;
-import com.github.ymdpharm.approx.ApproxValueLaplace;
+import com.github.ymdpharm.polyagamma.approx.ApproxSampler;
+import com.github.ymdpharm.polyagamma.approx.ApproxSamplerWrapper;
+import com.github.ymdpharm.polyagamma.approx.ApproxValue;
+import com.github.ymdpharm.polyagamma.approx.ApproxValueLaplace;
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
 import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
