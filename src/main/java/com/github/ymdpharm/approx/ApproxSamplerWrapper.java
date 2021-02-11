@@ -6,7 +6,9 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 public class ApproxSamplerWrapper implements ApproxSampler {
     private final ApproxSampler sampler;
-
+    /**
+     * select the most effective sampling algorithm automatically, based on b.
+     */
     public ApproxSamplerWrapper(double b, double c, RandomGenerator rng) {
         this.sampler = initSampler(b, c, rng);
     }

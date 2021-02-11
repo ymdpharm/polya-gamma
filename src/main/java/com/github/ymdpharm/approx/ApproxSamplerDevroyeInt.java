@@ -1,5 +1,7 @@
 package com.github.ymdpharm.approx;
 
+import org.apache.commons.math3.exception.NotStrictlyPositiveException;
+import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.random.RandomGenerator;
 
 public class ApproxSamplerDevroyeInt implements ApproxSampler {
@@ -7,16 +9,19 @@ public class ApproxSamplerDevroyeInt implements ApproxSampler {
     private final double c;
     private RandomGenerator rng;
 
+    /**
+     * pick one from PG(b,c)
+     * b must be a positive integer.
+     */
     public ApproxSamplerDevroyeInt(int b, double c, RandomGenerator rng) {
+        if (b <= 0) {
+            throw new NotStrictlyPositiveException(LocalizedFormats.SHAPE, b);
+        }
         this.b = b;
         this.c = c;
         this.rng = rng;
     }
 
-    /*
-    pick one from X ~ PG(b,c)
-    b must be a positive integer.
-     */
     public double sample() {
         return 0;
     }
