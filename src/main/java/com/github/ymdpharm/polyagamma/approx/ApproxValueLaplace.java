@@ -13,11 +13,11 @@ public class ApproxValueLaplace implements ApproxValue {
     }
 
     public double mean() {
-        return b / 2 / c * Math.tanh(c / 2);
+        return b / 2 / (c + 1e-6) * Math.tanh((c + 1e-6) / 2);
     }
 
     public double variance() {
-        return b / 4 / Math.pow(c, 3) * (Math.sinh(c) - c) / Math.pow(Math.cosh(c / 2), 2);
+        return b / 4 / Math.pow((c + 1e-6), 3) * (Math.sinh((c + 1e-6)) - (c + 1e-6)) / Math.pow(Math.cosh((c + 1e-6) / 2), 2);
     }
 
     public double density(double x) {

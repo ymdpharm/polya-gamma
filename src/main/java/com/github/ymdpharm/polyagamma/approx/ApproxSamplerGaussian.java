@@ -27,11 +27,12 @@ public class ApproxSamplerGaussian implements ApproxSampler {
         return normM1M2.sample();
     }
 
-    private double m1() {
-        return b / 2 / c * Math.tanh(c / 2);
+    public double m1() {
+        return b / 2 / (c + 1e-6) * Math.tanh((c + 1e-6) / 2);
     }
 
-    private double m2() {
-        return b / 4 / Math.pow(c, 3) * (Math.sinh(c) - c) / Math.pow(Math.cosh(c / 2), 2);
+    public double m2() {
+        return b / 4 / Math.pow((c + 1e-6), 3) * (Math.sinh((c + 1e-6)) - (c + 1e-6)) / Math.pow(Math.cosh((c + 1e-6) / 2), 2);
     }
+
 }
