@@ -17,7 +17,7 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     public enum AvailableSampler {
         Devroye,
         Gaussian,
-        SP,
+        //SP,
         Wrapper,
     }
 
@@ -53,9 +53,9 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
             case Gaussian:
                 this.approxSampler = new ApproxSamplerGaussian(b, c, rng);
                 break;
-            case SP:
-                this.approxSampler = new ApproxSamplerSP(b, c, rng);
-                break;
+            //case SP:
+            //    this.approxSampler = new ApproxSamplerSP(b, c, rng);
+            //    break;
             default:
                 this.approxSampler = new ApproxSamplerWrapper(b, c, rng);
                 break;
