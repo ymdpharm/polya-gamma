@@ -15,12 +15,10 @@ public class ApproxSamplerWrapper implements ApproxSampler {
     }
 
     private ApproxSampler initSampler(double b, double c, RandomGenerator rng) {
-        int bint = Math.round((float) b);
-
-        if (b > 13) {
+        if (b > 170) {
+            return new ApproxSamplerGaussian(b, c, rng);
+        } else if (b > 13) {
             return new ApproxSamplerSP(b, c, rng);
-        } else if (Math.abs(b - bint) < 1e-6 && bint > 0) {
-            return new ApproxSamplerDevroyeInt(bint, c, rng);
         } else if (b > 0) {
             return new ApproxSamplerDevroye(b, c, rng, 100);
         } else {
