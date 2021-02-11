@@ -1,20 +1,20 @@
 # polya-gamma
 ![pgb0](figs/pgb0.png) ![pg1c](figs/pg1c.png)
 
-[Apache Commons Math3](https://commons.apache.org/proper/commons-math/) compatible Polya-Gamma distribution sampler implementation in Java.
+An efficient sampler of Polya-Gamma distribution in pure Java.
 
-## Depends on
-- commons-math3 v3.6.1
+It is also compatible to other distributions of [Apache Commons Math3](https://commons.apache.org/proper/commons-math/).
 
 ## Example 
 ```java
 // use default sampler
 PolyaGammaDistribution pg1 = new PolyaGammaDistribution(2, 4);
-double x1 = pg1.sample(); 
+double x = pg1.sample(); 
+double mean = pg1.getNumericalMean();
+double vari = pg1.getNumericalVariance();
 
 // select sampler explicitly
 PolyaGammaDistribution pg2 = new PolyaGammaDistribution(2, 4, PolyaGammaDistribution.AvailableSampler.Devroye);
-double x2 = pg2.sample();
 ```
 
 ## Samplers
