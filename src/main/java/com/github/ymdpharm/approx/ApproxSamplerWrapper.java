@@ -1,40 +1,32 @@
 package com.github.ymdpharm.approx;
 
+import org.apache.commons.math3.exception.NotStrictlyPositiveException;
+import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.random.RandomGenerator;
 
 public class ApproxSamplerWrapper implements ApproxSampler {
-    private final double b;
-    private final int bint;
-    private final double c;
-    private final ApproxSampler dev;
-    private final ApproxSampler devInt;
-    private final ApproxSampler sp;
+    private final ApproxSampler sampler;
 
-    public ApproxSamplerWrapper(double b, double c) {
-        this.b = b;
-        this.bint = Math.round((float) b);
-        this.c = c;
-        this.dev = new ApproxSamplerDevroye(b, c, 100);
-        this.devInt = new ApproxSamplerDevroyeInt(bint, c);
-        this.sp = new ApproxSamplerSP(b, c);
+    public ApproxSamplerWrapper(double b, double c, RandomGenerator rng) {
+        this.sampler = initSampler(b, c, rng);
     }
 
-    public double sample(RandomGenerator rng) {
-//        todo: fasten.
-//        if (b > 13) {
-//            return sp.sample(rng);
-//        } else if (Math.abs(b - bint) < 1e-6 && bint > 0) {
-//            return devInt.sample(rng);
-//        } else if (b > 0) {
-//            return dev.sample(rng);
-//        } else {
-//            return 0;
-//        }
+    private ApproxSampler initSampler(double b, double c, RandomGenerator rng) {
+        int bint = Math.round((float) b);
 
-        if (b > 0) {
-            return dev.sample(rng);
+        if (b > 13) {
+            return new ApproxSamplerSP(b, c, rng);
+        } else if (Math.abs(b - bint) < 1e-6 && bint > 0) {
+            return new ApproxSamplerDevroyeInt(bint, c, rng);
+        } else if (b > 0) {
+            return new ApproxSamplerDevroye(b, c, rng, 100);
         } else {
-            return 0;
+            // unreachable
+            throw new NotStrictlyPositiveException(LocalizedFormats.SHAPE, b);
         }
+    }
+
+    public double sample() {
+        return sampler.sample();
     }
 }

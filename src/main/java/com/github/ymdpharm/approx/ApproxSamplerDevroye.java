@@ -9,11 +9,11 @@ public class ApproxSamplerDevroye implements ApproxSampler {
     private final int trunc;
     private final GammaDistribution gammaB1;
 
-    public ApproxSamplerDevroye(double b, double c, int trunc) {
+    public ApproxSamplerDevroye(double b, double c, RandomGenerator rng, int trunc) {
         this.b = b;
         this.c = c;
         this.trunc = trunc;
-        this.gammaB1 = new GammaDistribution(b, 1); // rgn
+        this.gammaB1 = new GammaDistribution(rng, b, 1);
     }
 
     /*
@@ -21,7 +21,7 @@ public class ApproxSamplerDevroye implements ApproxSampler {
     with draw_sum_of_gammas approach.
     b must be a positive real number.
      */
-    public double sample(RandomGenerator rng) {
+    public double sample() {
         double x = 0;
         for (int k = 0; k < trunc; k++) {
             double gk = gammaB1.sample();

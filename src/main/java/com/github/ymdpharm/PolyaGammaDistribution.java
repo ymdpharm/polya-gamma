@@ -41,7 +41,7 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
         this.b = b;
         this.c = c;
         this.solverAbsoluteAccuracy = inverseCumAccuracy;
-        this.approxSampler = new ApproxSamplerWrapper(b, c);
+        this.approxSampler = new ApproxSamplerWrapper(b, c, this.random);
         this.approxValue = new ApproxValueLaplace(b, c);
     }
 
@@ -86,6 +86,6 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     }
 
     public double sample() {
-        return approxSampler.sample(this.random);
+        return approxSampler.sample();
     }
 }
