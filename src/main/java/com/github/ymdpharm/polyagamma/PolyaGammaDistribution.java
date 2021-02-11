@@ -1,9 +1,6 @@
 package com.github.ymdpharm.polyagamma;
 
-import com.github.ymdpharm.polyagamma.approx.ApproxSampler;
-import com.github.ymdpharm.polyagamma.approx.ApproxSamplerWrapper;
-import com.github.ymdpharm.polyagamma.approx.ApproxValue;
-import com.github.ymdpharm.polyagamma.approx.ApproxValueLaplace;
+import com.github.ymdpharm.polyagamma.approx.*;
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
 import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
@@ -17,23 +14,30 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     private final ApproxSampler approxSampler;
     private final ApproxValue approxValue;
 
-    public PolyaGammaDistribution() throws NotStrictlyPositiveException {
-        this(1, 0);
+    public enum AvailableSampler {
+        Devroye,
+        Gaussian,
+        SP,
+        Wrapper,
     }
 
     public PolyaGammaDistribution(double b, double c) throws NotStrictlyPositiveException {
-        this(b, c, 1.0E-9D);
+        this(new Well19937c(), b, c, 1.0E-9D, AvailableSampler.Wrapper);
+    }
+
+    public PolyaGammaDistribution(double b, double c, AvailableSampler availableSampler) throws NotStrictlyPositiveException {
+        this(new Well19937c(), b, c, 1.0E-9D, availableSampler);
     }
 
     public PolyaGammaDistribution(double b, double c, double inverseCumAccuracy) throws NotStrictlyPositiveException {
-        this(new Well19937c(), b, c, inverseCumAccuracy);
+        this(new Well19937c(), b, c, inverseCumAccuracy, AvailableSampler.Wrapper);
     }
 
     public PolyaGammaDistribution(RandomGenerator rng, double b, double c) throws NotStrictlyPositiveException {
-        this(rng, b, c, 1.0E-9D);
+        this(rng, b, c, 1.0E-9D, AvailableSampler.Wrapper);
     }
 
-    public PolyaGammaDistribution(RandomGenerator rng, double b, double c, double inverseCumAccuracy) throws NotStrictlyPositiveException {
+    public PolyaGammaDistribution(RandomGenerator rng, double b, double c, double inverseCumAccuracy, AvailableSampler availableSampler) throws NotStrictlyPositiveException {
         super(rng);
         if (b <= 0) {
             throw new NotStrictlyPositiveException(LocalizedFormats.SHAPE, b);
@@ -41,7 +45,21 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
         this.b = b;
         this.c = c;
         this.solverAbsoluteAccuracy = inverseCumAccuracy;
-        this.approxSampler = new ApproxSamplerWrapper(b, c, this.random);
+
+        switch (availableSampler) {
+            case Devroye:
+                this.approxSampler = new ApproxSamplerDevroye(b, c, rng, 100);
+                break;
+            case Gaussian:
+                this.approxSampler = new ApproxSamplerGaussian(b, c, rng);
+                break;
+            case SP:
+                this.approxSampler = new ApproxSamplerSP(b, c, rng);
+                break;
+            default:
+                this.approxSampler = new ApproxSamplerWrapper(b, c, rng);
+                break;
+        }
         this.approxValue = new ApproxValueLaplace(b, c);
     }
 

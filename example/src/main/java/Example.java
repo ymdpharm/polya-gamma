@@ -6,9 +6,9 @@ import java.util.stream.IntStream;
 
 public class Example {
     public static void main(String[] args) {
-        PolyaGammaDistribution pg = new PolyaGammaDistribution(1.5, 4);
+        PolyaGammaDistribution pg = new PolyaGammaDistribution(200, 4, PolyaGammaDistribution.AvailableSampler.Gaussian);
         List<Double> samples = IntStream.range(0, 100).mapToDouble(i -> {
-            double x  = pg.sample();
+            double x = pg.sample();
             System.out.println(i + ": " + x);
             return x;
         }).boxed().collect(Collectors.toList());
@@ -18,6 +18,5 @@ public class Example {
 
         System.out.println("mean: " + mean);
         System.out.println("variance: " + vari);
-
     }
 }
