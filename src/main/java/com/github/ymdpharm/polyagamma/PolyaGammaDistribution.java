@@ -15,7 +15,7 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
     private final ApproxValue approxValue;
 
     public enum AvailableSampler {
-        Devroye,
+        SumGamma,
         Gaussian,
         //SP,
         Wrapper,
@@ -47,8 +47,8 @@ public class PolyaGammaDistribution extends AbstractRealDistribution {
         this.solverAbsoluteAccuracy = inverseCumAccuracy;
 
         switch (availableSampler) {
-            case Devroye:
-                this.approxSampler = new ApproxSamplerDevroye(b, c, rng, 100);
+            case SumGamma:
+                this.approxSampler = new ApproxSamplerSumGamma(b, c, rng, 100);
                 break;
             case Gaussian:
                 this.approxSampler = new ApproxSamplerGaussian(b, c, rng);

@@ -20,7 +20,7 @@ public class ApproxSamplerWrapper implements ApproxSampler {
         //} else if (b > 13) {
         //    return new ApproxSamplerSP(b, c, rng);
         } else if (b > 0) {
-            return new ApproxSamplerDevroye(b, c, rng, 100);
+            return new ApproxSamplerSumGamma(b, c, rng, 100);
         } else {
             // unreachable
             throw new NotStrictlyPositiveException(LocalizedFormats.SHAPE, b);

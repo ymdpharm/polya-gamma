@@ -5,17 +5,17 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.random.RandomGenerator;
 
-public class ApproxSamplerDevroye implements ApproxSampler {
+public class ApproxSamplerSumGamma implements ApproxSampler {
     private final double b;
     private final double c;
     private final int trunc;
     private final GammaDistribution gammaB1;
 
     /**
-     * pick one from PG(b,c) using sum_of_gammas approach.
+     * pick one from PG(b,c) using naive sum_of_gammas approach.
      * b must be a positive real number.
      */
-    public ApproxSamplerDevroye(double b, double c, RandomGenerator rng, int trunc) {
+    public ApproxSamplerSumGamma(double b, double c, RandomGenerator rng, int trunc) {
         if (b <= 0) {
             throw new NotStrictlyPositiveException(LocalizedFormats.SHAPE, b);
         }

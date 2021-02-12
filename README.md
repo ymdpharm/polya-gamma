@@ -14,12 +14,12 @@ double mean = pg1.getNumericalMean();
 double vari = pg1.getNumericalVariance();
 
 // select sampler explicitly
-PolyaGammaDistribution pg2 = new PolyaGammaDistribution(2, 4, PolyaGammaDistribution.AvailableSampler.Devroye);
+PolyaGammaDistribution pg2 = new PolyaGammaDistribution(2, 4, PolyaGammaDistribution.AvailableSampler.Gaussian);
 ```
 
 ## Samplers
 - Wrapper (default)
-- Devroye approx
+- SumGamma approx
 - Gaussian approx
 - Saddle Point approx (WIP)
 
