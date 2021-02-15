@@ -27,7 +27,7 @@ public class CommonFunction {
     }
 
     public static double newtonMethod(double md, double x0) {
-        return newtonMethodWithK1K2Info(md, x0)[1];
+        return newtonMethodWithK1K2Info(md, x0)[0];
     }
 
     public static double seed(double x) {
